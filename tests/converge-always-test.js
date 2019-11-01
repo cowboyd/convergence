@@ -1,7 +1,7 @@
 import { describe, beforeEach, afterEach, it } from 'mocha';
 import { use, expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { always } from '../src/converge';
+import { always } from '../src/index';
 
 use(chaiAsPromised);
 
@@ -19,13 +19,6 @@ describe('BigTest Convergence - always', () => {
     if (timeout) {
       clearTimeout(timeout);
     }
-  });
-
-  it('returns a thennable function', () => {
-    expect(test(5)).to.be.a('function');
-    expect(test(5)).to.have.property('then').that.is.a('function');
-    expect(test(5)()).to.be.an.instanceof(Promise);
-    expect(test(5).then(() => {})).to.be.an.instanceof(Promise);
   });
 
   it('resolves if the assertion does not fail throughout the timeout', async () => {
@@ -50,20 +43,6 @@ describe('BigTest Convergence - always', () => {
     await expect(always(() => Promise.resolve())).to.be.rejectedWith(/promise/);
   });
 
-  it('resolves with a stats object', async () => {
-    let start = Date.now();
-    let stats = await expect(test(5)).to.be.fulfilled;
-    let end = Date.now();
-
-    expect(stats.start).to.be.within(start, start + 1);
-    expect(stats.end).to.be.within(end - 1, end);
-    expect(stats.elapsed).to.be.within(50, 70);
-    expect(stats.runs).to.equal(6);
-    expect(stats.always).to.be.true;
-    expect(stats.timeout).to.equal(50);
-    expect(stats.value).to.be.undefined;
-  });
-
   describe('when the assertion returns `false`', () => {
     beforeEach(() => {
       test = (num) => always(() => total < num, 50);
@@ -75,7 +54,7 @@ describe('BigTest Convergence - always', () => {
 
     it('rejects when `false` is returned', () => {
       timeout = setTimeout(() => total = 10, 30);
-      return expect(test(10)).to.be.rejectedWith('convergent assertion returned `false`');
+      return expect(test(10)).to.be.rejectedWith('TimeoutError');
     });
   });
 

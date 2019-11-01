@@ -8,29 +8,28 @@
   "module": "dist/esm/index.js",
   "files": [
     "dist",
-    "docs",
     "src"
   ],
   "scripts": {
     "build": "rollup --config",
-    "docs": "bigtest-docs",
     "lint": "eslint --ignore-path .gitignore ./",
     "test": "mocha --opts ./tests/mocha.opts ./tests",
-    "prepack": "npm run docs && npm run build"
+    "prepack": "npm run build"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@bigtest/meta": "bigtestjs/meta",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^4.16.0",
+    "eslint": "^6.6.0",
     "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^3.0.1",
     "mocha": "~6.2.2",
     "rollup": "^0.53.0",

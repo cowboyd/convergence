@@ -96,9 +96,7 @@ export function runAssertion(subject, arg, stats) {
     }
   }
 
-  return converge(assertion, timeout)
-  // incorporate stats and curry the assertion return value
-    .then((convergeStats) => collectStats(stats, convergeStats, arg));
+  return converge(assertion, timeout);
 }
 
 /**

@@ -1,4 +1,7 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 2019
+  },
   "extends": "standard",
   "rules": {
     "semi": ["error", "always"],
